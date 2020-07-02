@@ -25,14 +25,19 @@ RSpec.describe Trail, type: :model do
       expect(subject).to_not be_valid
     end
 
-    # it 'is not valid with a distance of less than 0' do
-    #   subject.distance = -10
-    #   expect(subject).to_not be_valid
-    # end
+    it 'is not valid with a distance of less than 0' do
+      subject.distance = -10
+      expect(subject).to_not be_valid
+    end
 
     it 'is not valid with a difficulty greater than 5' do
       subject.difficulty = 6
       expect(subject).to_not be_valid
+    end
+
+    it 'it is valid with a location' do
+      subject.location = "Macedon Ranges"
+      expect(subject).to be_valid
     end
   end 
 
