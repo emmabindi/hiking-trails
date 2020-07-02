@@ -67,16 +67,26 @@ RSpec.describe "Trails", type: :request do
   end
 
   # ID of the one trail ?
-  # describe 'POST #update' do 
-  #   context 'when the trail is valid' do 
-  #     before(:example) do 
-  #       @trail_params = attributes_for(:trail)
-  #       post "/trails#{@trail.id}", params: { trails: @trail_params }
-  #   end
+#   describe 'POST #update' do 
+#     context 'when the trail is valid' do 
+#       before(:example) do 
+#         # select_trail = Trail.create(trail_params[:trail])
+#         # @trail_params = attributes_for(:trail)
+#         # post "/trails/#{@trail.id}", params: { trails: @trail_params }
+#         @trail_params = attributes_for(@trail.id)
+#         post "/trails/#{@trail.id}", params: { trails: @trail_params}
+#     end
 
-  #   it 'returns http 200' do 
-  #     expect(response).to have_http_status(200)
-  #   end
+#     it 'returns http 200' do 
+#       expect(response).to have_http_status(200)
+#     end
+
+#     it 'should use before action ' do
+#       # { should use_before_action(:set_trail) }
+#     end
+#   end
+# end
+    
 
   #   it 'saves the Trail to the database' do
   #     # expect(@trail(params[:id]).name).to eq(@trail_params[:name])
