@@ -1,5 +1,11 @@
-example_id                         | status | run_time        |
----------------------------------- | ------ | --------------- |
-./spec/models/trail_spec.rb[1:1:1] | passed | 0.00286 seconds |
-./spec/models/trail_spec.rb[1:1:2] | passed | 0.00349 seconds |
-./spec/models/trail_spec.rb[1:1:3] | passed | 0.09067 seconds |
+example_id                                | status  | run_time        |
+----------------------------------------- | ------- | --------------- |
+./spec/models/facility_spec.rb[1:1]       | pending | 0.00002 seconds |
+./spec/models/facility_trail_spec.rb[1:1] | pending | 0.00001 seconds |
+./spec/models/trail_spec.rb[1:1:1]        | passed  | 0.00923 seconds |
+./spec/models/trail_spec.rb[1:1:2]        | passed  | 0.00853 seconds |
+./spec/models/trail_spec.rb[1:1:3]        | passed  | 0.00359 seconds |
+./spec/models/trail_spec.rb[1:1:4]        | passed  | 0.00319 seconds |
+./spec/models/trail_spec.rb[1:1:5]        | passed  | 0.00421 seconds |
+./spec/models/trail_spec.rb[1:1:6]        | passed  | 0.00653 seconds |
+./spec/models/trail_spec.rb[1:2:1]        | passed  | 0.05185 seconds |
