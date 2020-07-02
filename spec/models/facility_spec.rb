@@ -1,5 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Facility, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { build(:facility) }
+
+  context 'validations' do
+    it 'has a valid factory' do
+      expect(build(:facility)).to be_valid
+    end
+
+    it { expect(subject).to validate_presence_of(:name) }
+
+    it 'is not valid with a name shorter than 3 characters' do
+      subject.name = "h"
+      expect(subject).to_not be_valid
+    end
+
+    it 'is not valid with a name longer than 55 characters' do
+      subject.name = "hkjthdrjkghskdruhtdkujfhgkdjfhgkjxfhguhgkjxfhuhfkjbhgkuhckgjbhufhgkjhbjucfhkubchfgucfhjughxfugyudfkghkuxftytiuythguyxiu"
+      expect(subject).to_not be_valid
+    end
+  end
 end
