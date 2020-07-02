@@ -20,4 +20,10 @@ RSpec.describe Facility, type: :model do
       expect(subject).to_not be_valid
     end
   end
+
+  context 'associations' do
+    it { expect(subject).to have_many(:trails).through(:facility_trails) }
+  end
 end
+
+
