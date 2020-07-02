@@ -15,13 +15,16 @@ class TrailsController < ApplicationController
   end
 
   def update
-    @trail.update(trail_params)
-    render json: "Trail Updated", status: 200
+    if @trail.update(trail_params)
+      render json: {}, status: :no_content
+    else
+      render json: {errors: @trail.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    @trail.destroy
-    render json: "Trail deleted", status: 200
+    @trail.delete
+    render json: {}, status: :no_content
   end
 
   private

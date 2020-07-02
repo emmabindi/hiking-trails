@@ -66,27 +66,67 @@ RSpec.describe "Trails", type: :request do
     end
   end
 
-  # ID of the one trail ?
-#   describe 'POST #update' do 
-#     context 'when the trail is valid' do 
-#       before(:example) do 
-#         # select_trail = Trail.create(trail_params[:trail])
-#         # @trail_params = attributes_for(:trail)
-#         # post "/trails/#{@trail.id}", params: { trails: @trail_params }
-#         @trail_params = attributes_for(@trail.id)
-#         post "/trails/#{@trail.id}", params: { trails: @trail_params}
-#     end
+  describe 'PUT #update' do 
+    context 'when the params are valid' do 
+      before(:example) do 
+        @trail = create(:trail)
+        @updated_name = "Updated Trail"
+        put "/trails/#{@trail.id}", params: { trail: {name: @updated_name} }
+    end
 
-#     it 'returns http 200' do 
-#       expect(response).to have_http_status(200)
-#     end
+    it 'has a http no content response' do 
+      expect(response).to have_http_status(:no_content)
+    end
 
-#     it 'should use before action ' do
-#       # { should use_before_action(:set_trail) }
-#     end
-#   end
-# end
+    it 'updates the trail in the database' do
+      expect(Trail.find(@trail.id).name).to eq(@updated_name)
+    end
+
+    it 'should use before action ' do
+      # { should use_before_action(:set_trail) }
+    end
+  end
+
+  context 'when the params are invalid' do
+    before(:example) do
+      @trail = create(:trail)
+      put "/trails/#{@trail.id}", params: { trail: {name: nil} }
+      @json_response = JSON.parse(response.body)
+    end
+
+    it 'returns a unprocessable entity' do
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
+    it 'has the correct number of errors' do 
+      expect(@json_response['errors'].count).to eq(2)
+    end
+  end
+end
     
+  describe 'DELETE #destroy' do 
+    context 'when the trail is valid' do 
+      before(:example) do
+        trail = create(:trail)
+        delete "/trails/#{trail.id}"
+      end
+
+      it 'has a http no content response' do 
+        expect(response).to have_http_status(:no_content)
+      end
+
+      it 'returns http deleted' do
+        expect(response).to have_http_status(:no_content) 
+      end
+
+      it 'removes the trail from the database' do
+        expect(Trail.count).to eq(0)
+      end
+    end
+  end
+end
+
+
 
   #   it 'saves the Trail to the database' do
   #     # expect(@trail(params[:id]).name).to eq(@trail_params[:name])
@@ -112,21 +152,3 @@ RSpec.describe "Trails", type: :request do
   #     expect(@json_response['errors'][0]).to eq("Name can't be blank")
   #   end
   # end
-
-  describe 'DELETE #destroy' do 
-    context 'when the trail is valid' do 
-      before(:example) do
-        @trail = create(:trail)
-        delete "/trails/#{@trail.id}"
-      end
-
-      it 'returns http deleted' do
-        expect(response).to have_http_status(200) 
-      end
-
-      # it 'deletes the Trail from the database' do
-        # expect(Trail.last.name).to eq(@trail_params[:name])
-      # end
-    end
-  end
-end
