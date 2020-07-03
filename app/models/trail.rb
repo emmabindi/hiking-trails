@@ -5,4 +5,5 @@ class Trail < ApplicationRecord
   validates :difficulty, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
   has_many :facility_trails
   has_many :facilities, through: :facility_trails
+  belongs_to :user
 end

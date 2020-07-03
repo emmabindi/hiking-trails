@@ -37,6 +37,7 @@ RSpec.describe Trail, type: :model do
 
   context 'associations' do
     it { expect(subject).to have_many(:facilities).through(:facility_trails) }
+    it { expect(subject).to belong_to(:user)}
   end
 end
 

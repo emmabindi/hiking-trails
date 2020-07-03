@@ -6,6 +6,8 @@ FactoryBot.define do
     distance {100}
     difficulty {3}
 
+    association :user
+
     trait :invalid do 
       name {nil}
     end

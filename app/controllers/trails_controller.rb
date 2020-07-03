@@ -1,5 +1,7 @@
 class TrailsController < ApplicationController
+  before_action :authenticate_user, only: [:create, :update, :destroy]
   before_action :set_trail, only: [:update, :destroy]
+
   def index
     trails = Trail.all
     render json: { trails: trails }, status: 200
@@ -7,6 +9,7 @@ class TrailsController < ApplicationController
 
   def create
     trail = Trail.new(trail_params)
+    trail.user = current_user
     if trail.save 
       render json: {}, status: :created
     else
@@ -29,7 +32,7 @@ class TrailsController < ApplicationController
 
   private
   def trail_params
-    params.require(:trail).permit(:name, :location, :difficulty, :distance)
+    params.require(:trail).permit(:name, :location, :difficulty, :distance, :user_id)
   end
 
   def set_trail
